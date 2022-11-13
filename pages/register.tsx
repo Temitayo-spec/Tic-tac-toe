@@ -1,11 +1,24 @@
-import React from 'react'
+import Image from 'next/image';
+import React from 'react';
+import { RegisterForm } from '../components';
+import styles from '../styles/RegisterForm.module.scss';
 
-type Props = {}
+
+type Props = {};
 
 const register = (props: Props) => {
   return (
-    <div>register</div>
-  )
-}
+    <div className={styles.signup__wrapper}>
+      <Image
+        src="/images/register.png"
+        alt="register"
+        width={500}
+        height={500}
+      />
 
-export default register
+      <RegisterForm />
+    </div>
+  );
+};
+
+export default register;

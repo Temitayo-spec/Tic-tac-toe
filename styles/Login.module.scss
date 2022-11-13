@@ -1,0 +1,139 @@
+.login__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    margin: 0 auto;
+
+    .lhs__content__title {
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffd700;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px #000;
+        }
+
+        p {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #fff;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px #000;
+        }
+    }
+
+    .lhs__content__title__text {
+        font-size: 2.5rem;
+        letter-spacing: 3px;
+        margin-bottom: 0em;
+        color: #ffd700;
+        text-shadow: 0 0 10px #000;
+
+        &:hover {
+            color: #fff;
+            text-shadow: 0 0 10px #000;
+        }
+    }
+
+    .lhs__content__form__input {
+        input {
+            width: 100%;
+            height: 50px;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            padding: 0 10px;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #fff;
+            background-color: transparent;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px #000;
+            outline: none;
+            margin: 0.5em 0;
+
+            &::placeholder {
+                color: #fff;
+                text-shadow: 0 0 10px #000;
+            }
+
+            &:focus {
+                border: 1px solid #ffd700;
+
+                &::placeholder {
+                    color: #ffd700;
+                    text-shadow: 0 0 10px #000;
+                }
+            }
+        }
+
+        button {
+            width: 100%;
+            height: 50px;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            padding: 0 10px;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #ffd700;
+            background-color: transparent;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px #000;
+            outline: none;
+            margin: 0.5em 0;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+
+            &:hover {
+                background-color: #ffd700;
+                color: #fff;
+            }
+
+            &::after {
+                content: "/>";
+                margin-left: 0.5em;
+                animation: move 1s infinite;
+
+                @keyframes move {
+                    0% {
+                        transform: translateX(0);
+                    }
+
+                    50% {
+                        transform: translateX(10px);
+                    }
+
+                    100% {
+                        transform: translateX(0);
+                    }
+                }
+            }
+
+            &::before {
+                content: "<";
+                margin-right: 0.5em;
+            }
+        }
+    }
+
+    .rhs {
+        img {
+            animation: bounce 2s infinite;
+            filter: drop-shadow(0 0 10px #ffd700);
+
+            @keyframes bounce {
+                0% {
+                    transform: translateY(0);
+                }
+
+                50% {
+                    transform: translateY(-10px);
+                }
+
+                100% {
+                    transform: translateY(0);
+                }
+            }
+        }
+    }
+}

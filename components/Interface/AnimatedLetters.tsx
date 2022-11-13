@@ -1,18 +1,18 @@
-import React, { Key } from 'react';
-import styles from '../../styles/AnimatedLetters.module.scss';
+import React from 'react';
 
 type Props = {
   strChars: string[];
   idx: number;
   letterClass: string;
+  className?: string;
 };
 
-const AnimatedLetters = ({ strChars, letterClass, idx }: Props) => {
+const AnimatedLetters = ({ strChars, letterClass, idx, className }: Props) => {
   return (
     <span>
       {strChars.map((char: string, i: number) => {
         return (
-          <span key={i} className={`${letterClass} _${i + idx}`}>
+          <span key={i} className={`${letterClass} _${i + idx} ${className}`}>
             {char}
           </span>
         );
