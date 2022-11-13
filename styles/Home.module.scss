@@ -1,0 +1,73 @@
+.main {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  justify-content: space-between;
+  height: calc(100vh - 5em);
+  width: 90%;
+  overflow-y: hidden;
+
+  .lhs {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 50%;
+    padding: 0 1em;
+
+    .title__letter {
+      font-size: 2em;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 0 0.5em #000;
+      letter-spacing: 3px;
+    }
+
+    .description {
+      font-size: 1.5em;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 0 0.5em #000;
+      letter-spacing: 3px;
+    }
+
+    .button {
+      height: 2em;
+      padding: 0 2em;
+      border: none;
+      border-radius: 5px;
+      background-color: #ffd700;
+      color: #fff;
+      font-size: 1.5em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      letter-spacing: 3px;
+
+      &:hover {
+        background-color: transparent;
+        border: 1px solid #ffd700;
+        color: #fff;
+      }
+    }
+  }
+
+  .rhs .image {
+    object-fit: contain;
+    animation: bounceInfinitely 3s linear infinite;
+    filter: drop-shadow(0 0 0.5em #000);
+
+    @keyframes bounceInfinitely {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-1em);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+  }
+}

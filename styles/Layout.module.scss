@@ -1,0 +1,9 @@
+.layout {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: hidden;
+    background: url('/images/bg-tic-tac-toe.jpg') center center no-repeat;
+    background-size: cover;
+}

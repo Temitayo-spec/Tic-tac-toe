@@ -1,0 +1,61 @@
+.title {
+    font-size: 2em;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 0.5em #000;
+}
+
+@for $i from 1 through 20 {
+    .title:nth-child(#{$i}) {
+        animation: fadeInY 2s ease infinite;
+        animation-delay: 0.1s * $i;
+    }
+
+    @keyframes fadeInY {
+        0% {
+            opacity: 0;
+            transform: translateY(-1em);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+.setAnimatedLetters {
+    color: yellow;
+    &:hover {
+        animation: rubberBand3D 1s ease infinite;
+        @keyframes rubberBand3D {
+            0% {
+                transform: rotate3d(0, 0, 1, 0deg);
+            }
+
+            30% {
+                transform: rotate3d(0, 0, 1, -30deg);
+            }
+
+            40% {
+                transform: rotate3d(0, 0, 1, -30deg);
+            }
+
+            50% {
+                transform: rotate3d(0, 0, 1, 0deg);
+            }
+
+            60% {
+                transform: rotate3d(0, 0, 1, 30deg);
+            }
+
+            70% {
+                transform: rotate3d(0, 0, 1, 30deg);
+            }
+
+            100% {
+                transform: rotate3d(0, 0, 1, 0deg);
+            }
+        }
+    }
+}
