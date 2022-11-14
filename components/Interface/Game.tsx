@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Board from './Game/Board';
-import styles from "../../styles/Game.module.scss";
+import styles from '../../styles/Game.module.scss';
 import { Waveform } from '@uiball/loaders';
-
+import { Window, MessageList, MessageInput } from 'stream-chat-react';
 
 type Props = {
   channel: any;
@@ -27,11 +27,17 @@ const Game = ({ channel }: Props) => {
       </div>
     );
   }
-  return <div className={styles.game__ctn}>
-    <Board />
-    {/* <Chat /> */}
-
-  </div>;
+  return (
+    <div className={styles.game__ctn}>
+      <Board />
+      <div className={styles.rhs}>
+        <Window>
+          <MessageList />
+          <MessageInput />
+        </Window>
+      </div>
+    </div>
+  );
 };
 
 export default Game;

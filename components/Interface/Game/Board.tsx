@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../../../styles/Board.module.scss';
+import { createConfetti } from '../../Confetti/canvas-confetti';
+import { useChannelStateContext, useChatContext } from 'stream-chat-react';
 
 type Props = {};
 
@@ -10,17 +12,33 @@ const Board = (props: Props) => {
     ['', '', ''],
   ]);
   const [turn, setTurn] = useState('X');
+  const [player, setPlayer] = useState('X');
   const [winner, setWinner] = useState('');
   const [isDraw, setIsDraw] = useState(false);
+  const { channel } = useChannelStateContext();
+  const { client } = useChatContext();
 
-  const handleCellClick = (row: number, col: number) => {
-    if (board[row][col] !== '' || winner !== '') {
+  const handleCellClick = async (row: number, col: number) => {
+    if (board[row][col] !== '' || winner !== '' || isDraw || turn !== player) {
       return;
     }
 
     const newBoard = [...board];
-    newBoard[row][col] = turn;
-    setBoard(newBoard);
+
+    if (turn === player) {
+      newBoard[row][col] = turn;
+      setBoard(newBoard);
+      setTurn(player === 'X' ? 'O' : 'X');
+      await channel.sendEvent({
+        type: 'game_move' as any,
+        data: {
+          row,
+          col,
+          turn,
+          player,
+        },
+      });
+    }
 
     if (checkWinner(newBoard, turn)) {
       setWinner(turn);
@@ -89,8 +107,57 @@ const Board = (props: Props) => {
       </div>
     );
   };
+
+  channel.on((event: any) => {
+    if (event.type === 'game_move' && event.user.id !== client.userID) {
+      const currPlayer = event.data.player === 'X' ? 'O' : 'X';
+      const newBoard = [...board];
+      newBoard[event.data.row][event.data.col] = event.data.player;
+      setBoard(newBoard);
+      setTurn(currPlayer);
+      setPlayer(currPlayer);
+    }
+  });
+
+  const reset = async () => {
+    setBoard([
+      ['', '', ''],
+      ['', '', ''],
+      ['', '', ''],
+    ]);
+    setTurn('X');
+    setWinner('');
+    setIsDraw(false);
+    await channel.sendEvent({
+      type: 'game_reset' as any,
+      data: {
+        player,
+      },
+    });
+  };
+
+  useEffect(() => {
+    if (winner !== '') {
+      createConfetti();
+    }
+  }, [winner]);
+
+  channel.on((event: any) => {
+    if (event.type === 'game_reset' && event.user.id !== client.userID) {
+      setBoard([
+        ['', '', ''],
+        ['', '', ''],
+        ['', '', ''],
+      ]);
+      setTurn('X');
+      setWinner('');
+      setIsDraw(false);
+    }
+  });
+
+  // launchFirework()
   return (
-    <>
+    <div className={styles.board__wrapper}>
       <div className={styles.header}>
         <h1 className={styles.title}>Tic Tac Toe</h1>
         <p>
@@ -124,8 +191,13 @@ const Board = (props: Props) => {
           {renderCell(2, 1)}
           {renderCell(2, 2)}
         </div>
+        {winner || isDraw ? (
+          <button type="button" onClick={reset} className={styles.reset__btn}>
+            Reset
+          </button>
+        ) : null}
       </div>
-    </>
+    </div>
   );
 };
 
