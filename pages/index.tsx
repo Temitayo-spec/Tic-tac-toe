@@ -2,8 +2,12 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { About, AnimatedLetters } from '../components';
 import styles from '../styles/Home.module.scss';
+import Cookies from 'universal-cookie';
+import { useRouter } from 'next/router';
 
 export default function Home() {
+  const cookie = new Cookies();
+  const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
   const [letterClass, setLetterClass] = useState('text__animate');
   const gameArray = 'Tic Tac Toe'.split('');
@@ -13,6 +17,13 @@ export default function Home() {
       setLetterClass('text__animate__hover');
     }, 5000);
   }, []);
+  useEffect(() => {
+    if (cookie.get('token')) {
+      router.push('/game');
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className={styles.container}>
       <About openModal={openModal} setOpenModal={setOpenModal} />
@@ -22,7 +33,7 @@ export default function Home() {
             <AnimatedLetters
               letterClass={letterClass}
               strChars={gameArray}
-              idx={22}
+              idx={2}
             />
           </h1>
           <p className={styles.description}>

@@ -1,10 +1,13 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import styles from '../../styles/RegisterForm.module.scss';
 import AnimatedLetters from './AnimatedLetters';
+import Cookies from 'universal-cookie';
 
 type Props = {};
 
 const RegisterForm = (props: Props) => {
+  const cookies = new Cookies();
   const [letterClass, setLetterClass] = useState('text__animate');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -13,7 +16,30 @@ const RegisterForm = (props: Props) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(email, password, confirmPassword, username);
+
+    if (password !== confirmPassword) {
+      alert("Passwords don't match");
+      return;
+    }
+
+    axios
+      .post('/api/auth/register', {
+        email,
+        password,
+        username,
+      })
+      .then((res) => {
+        const { token, email, username, userId, hashedPassword } = res.data;
+
+        cookies.set('token', token);
+        cookies.set('email', email);
+        cookies.set('username', username);
+        cookies.set('userId', userId);
+        cookies.set('hashedPassword', hashedPassword);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   const gameArray = 'Register'.split('');
 

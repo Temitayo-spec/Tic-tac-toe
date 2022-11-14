@@ -1,16 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../../styles/Login.module.scss';
 import AnimatedLetters from './AnimatedLetters';
+import axios from 'axios';
+import Cookies from 'universal-cookie';
 
 type Props = {};
 
 const LoginForm = (props: Props) => {
-  const [email, setEmail] = useState('');
+  const cookies = new Cookies();
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(email, password);
+    axios.post('/api/auth/login', { username, password }).then((res: any) => {
+      const { token, email, username, userId, hashedPassword } = res.data;
+
+      cookies.set('token', token);
+      cookies.set('email', email);
+      cookies.set('username', username);
+      cookies.set('userId', userId);
+      cookies.set('hashedPassword', hashedPassword);
+    });
   };
 
   const [letterClass, setLetterClass] = useState('text__animate');
@@ -43,9 +54,9 @@ const LoginForm = (props: Props) => {
               <div className={styles.lhs__content__form__input}>
                 <input
                   type="text"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </div>
               <div className={styles.lhs__content__form__input}>

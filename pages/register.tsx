@@ -1,12 +1,21 @@
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { RegisterForm } from '../components';
 import styles from '../styles/RegisterForm.module.scss';
-
+import Cookies from 'universal-cookie';
+import { useRouter } from 'next/router';
 
 type Props = {};
 
-const register = (props: Props) => {
+const Register = (props: Props) => {
+  const cookie = new Cookies();
+  const router = useRouter();
+  useEffect(() => {
+    if (cookie.get('token')) {
+      router.push('/game');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div className={styles.signup__wrapper}>
       <Image
@@ -14,6 +23,7 @@ const register = (props: Props) => {
         alt="register"
         width={500}
         height={500}
+        priority
       />
 
       <RegisterForm />
@@ -21,4 +31,4 @@ const register = (props: Props) => {
   );
 };
 
-export default register;
+export default Register;
