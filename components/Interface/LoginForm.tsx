@@ -3,6 +3,8 @@ import styles from '../../styles/Login.module.scss';
 import AnimatedLetters from './AnimatedLetters';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 
 type Props = {};
 
@@ -10,7 +12,7 @@ const LoginForm = (props: Props) => {
   const cookies = new Cookies();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
+const router = useRouter()
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     axios.post('/api/auth/login', { username, password }).then((res: any) => {
@@ -21,6 +23,8 @@ const LoginForm = (props: Props) => {
       cookies.set('username', username);
       cookies.set('userId', userId);
       cookies.set('hashedPassword', hashedPassword);
+      router.push('/game')
+      toast.success('Logged in successfully');
     });
   };
 
@@ -54,7 +58,7 @@ const LoginForm = (props: Props) => {
               <div className={styles.lhs__content__form__input}>
                 <input
                   type="text"
-                  placeholder="username"
+                  placeholder="Username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                 />

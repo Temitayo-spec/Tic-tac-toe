@@ -3,10 +3,13 @@ import React, { useState, useEffect } from 'react';
 import styles from '../../styles/RegisterForm.module.scss';
 import AnimatedLetters from './AnimatedLetters';
 import Cookies from 'universal-cookie';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
 
 type Props = {};
 
 const RegisterForm = (props: Props) => {
+  const router = useRouter();
   const cookies = new Cookies();
   const [letterClass, setLetterClass] = useState('text__animate');
   const [email, setEmail] = useState('');
@@ -36,6 +39,8 @@ const RegisterForm = (props: Props) => {
         cookies.set('username', username);
         cookies.set('userId', userId);
         cookies.set('hashedPassword', hashedPassword);
+        router.push('/game');
+        toast.success('Registered successfully');
       })
       .catch((err) => {
         console.log(err);
@@ -94,7 +99,7 @@ const RegisterForm = (props: Props) => {
               <div className={styles.lhs__content__form__input}>
                 <input
                   type="password"
-                  placeholder="confirm Password"
+                  placeholder="Confirm Password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />

@@ -10,16 +10,15 @@ type Props = {
 };
 
 const Header = ({ title }: Props) => {
-  const { pathname } = useRouter();
-  const cookie = new Cookies();
-
-  const logOut = () => {
-    cookie.remove('token');
-    cookie.remove('username');
-    cookie.remove('email');
-    cookie.remove('userId');
-    cookie.remove('hashedPassword');
-  };
+  const { pathname } = useRouter(),
+    cookie = new Cookies(),
+    logOut = () => {
+      cookie.remove('token');
+      cookie.remove('username');
+      cookie.remove('email');
+      cookie.remove('userId');
+      cookie.remove('hashedPassword');
+    };
   return (
     <div className={styles.header__wrapper}>
       <div className={styles.header__inner}>

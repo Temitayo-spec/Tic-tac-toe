@@ -4,6 +4,9 @@ import { Layout } from '../components';
 import { StreamChat } from 'stream-chat';
 import Cookies from 'universal-cookie';
 import { RecoilRoot } from 'recoil';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import '@stream-io/stream-chat-css/dist/css/index.css';
 
 export default function App({ Component, pageProps }: AppProps) {
   const cookies = new Cookies();
@@ -30,6 +33,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <RecoilRoot>
       <Layout>
+        <ToastContainer />
         <Component {...pageProps} />
       </Layout>
     </RecoilRoot>

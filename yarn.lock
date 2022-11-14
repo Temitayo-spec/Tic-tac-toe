@@ -194,9 +194,9 @@
   resolved "https://registry.npmjs.org/@stream-io/escape-string-regexp/-/escape-string-regexp-5.0.1.tgz"
   integrity sha512-qIaSrzJXieZqo2fZSYTdzwSbZgHHsT3tkd646vvZhh4fr+9nO4NlvqGmPF43Y+OfZiWf+zYDFgNiPGG5+iZulQ==
 
-"@stream-io/stream-chat-css@^3.6.0":
+"@stream-io/stream-chat-css@^3.6.0", "@stream-io/stream-chat-css@^3.7.0":
   version "3.7.0"
-  resolved "https://registry.npmjs.org/@stream-io/stream-chat-css/-/stream-chat-css-3.7.0.tgz"
+  resolved "https://registry.yarnpkg.com/@stream-io/stream-chat-css/-/stream-chat-css-3.7.0.tgz#81e94317bf3bc6d42eebab596c44a014e0a33ef4"
   integrity sha512-kSWJkNhIjW8Qfx+xSys61vII9Ugltcr6fWCWMn+De7u2US310KL67HEBvOfhgVZYnRDpv/LmuDWOJVX0Gm0G4Q==
 
 "@stream-io/transliterate@^1.5.5":
@@ -362,6 +362,11 @@
   dependencies:
     "@typescript-eslint/types" "5.42.1"
     eslint-visitor-keys "^3.3.0"
+
+"@uiball/loaders@^1.2.6":
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/@uiball/loaders/-/loaders-1.2.6.tgz#bd748a4538e16897daef6dec13dd4141efabd5c8"
+  integrity sha512-Db3be5pG9ciZa1Rxr6Iwv8bIwVP+g00m3GYQFsu3j7B9T16MpHhnGXLksuNtKlePdP3FCTFGpFrXbJz4GG/OOg==
 
 "@virtuoso.dev/react-urx@^0.2.12":
   version "0.2.13"
@@ -2844,6 +2849,13 @@ react-textarea-autosize@^8.3.0:
     "@babel/runtime" "^7.10.2"
     use-composed-ref "^1.3.0"
     use-latest "^1.2.1"
+
+react-toastify@^9.1.1:
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/react-toastify/-/react-toastify-9.1.1.tgz#9280caea4a13dc1739c350d90660a630807bf10b"
+  integrity sha512-pkFCla1z3ve045qvjEmn2xOJOy4ZciwRXm1oMPULVkELi5aJdHCN/FHnuqXq8IwGDLB7PPk2/J6uP9D8ejuiRw==
+  dependencies:
+    clsx "^1.1.1"
 
 react-virtuoso@^2.10.2, react-virtuoso@^2.16.5:
   version "2.19.1"
