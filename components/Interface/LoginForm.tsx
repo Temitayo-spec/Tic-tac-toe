@@ -20,19 +20,23 @@ const LoginForm = (props: Props) => {
     e.preventDefault();
     try {
       setIsLoading({ loading: true, error: false });
-      axios.post('/api/auth/login', { username, password }).then((res: any) => {
-        const { token, email, username, userId, hashedPassword } = res.data;
-        if (res.status === 200) {
-          cookies.set('token', token);
-          cookies.set('email', email);
-          cookies.set('username', username);
-          cookies.set('userId', userId);
-          cookies.set('hashedPassword', hashedPassword);
-          setIsLoading({ loading: false, error: false });
-          router.push('/game');
-          toast.success('Logged in successfully');
-        }
-      });
+      if (username !== '' && password !== '') {
+        axios
+          .post('/api/auth/login', { username, password })
+          .then((res: any) => {
+            const { token, email, username, userId, hashedPassword } = res.data;
+            if (res.status === 200) {
+              cookies.set('token', token);
+              cookies.set('email', email);
+              cookies.set('username', username);
+              cookies.set('userId', userId);
+              cookies.set('hashedPassword', hashedPassword);
+              setIsLoading({ loading: false, error: false });
+              router.push('/game');
+              toast.success('Logged in successfully');
+            }
+          });
+      }
     } catch (error) {
       setIsLoading({ loading: false, error: false });
       toast.error('Username or password is incorrect');

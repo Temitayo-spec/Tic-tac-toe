@@ -30,30 +30,32 @@ const RegisterForm = (props: Props) => {
 
     setIsLoading({ loading: true, error: false });
 
-    axios
-      .post('/api/auth/register', {
-        email,
-        password,
-        username,
-      })
-      .then((res) => {
-        const { token, email, username, userId, hashedPassword } = res.data;
+    if (email !== '' && password !== '' && username !== '') {
+      axios
+        .post('/api/auth/register', {
+          email,
+          password,
+          username,
+        })
+        .then((res) => {
+          const { token, email, username, userId, hashedPassword } = res.data;
 
-        if (res.status === 200) {
-          cookies.set('token', token);
-          cookies.set('email', email);
-          cookies.set('username', username);
-          cookies.set('userId', userId);
-          cookies.set('hashedPassword', hashedPassword);
-          router.push('/game');
-          toast.success('Registered successfully');
+          if (res.status === 200) {
+            cookies.set('token', token);
+            cookies.set('email', email);
+            cookies.set('username', username);
+            cookies.set('userId', userId);
+            cookies.set('hashedPassword', hashedPassword);
+            router.push('/game');
+            toast.success('Registered successfully');
+            setIsLoading({ loading: false, error: false });
+          }
+        })
+        .catch((err) => {
           setIsLoading({ loading: false, error: false });
-        }
-      })
-      .catch((err) => {
-        setIsLoading({ loading: false, error: false });
-        toast.error('Username or email already exists');
-      });
+          toast.error('Username or email already exists');
+        });
+    }
   };
   const gameArray = 'Register'.split('');
 

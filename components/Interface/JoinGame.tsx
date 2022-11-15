@@ -29,6 +29,7 @@ const JoinGame = (props: Props) => {
 
       if (response.users.length === 0) {
         toast.error('User not found');
+        setIsLoading(false);
         return;
       }
 
@@ -71,13 +72,19 @@ const JoinGame = (props: Props) => {
               letterClass={letterClass}
               idx={2}
               className={styles.lhs__content__title__text}
-            />
+              />
+              <p style={{
+                color: "#fff",
+                textAlign: "center",
+              }}>
+                Input Rival&apos;s Username.
+              </p>
             <input
               type="text"
               value={rivalUsername}
               onChange={(e) => setRivalUsername(e.target.value)}
             />
-            <button onClick={createChannel}>Create/Join Channel</button>
+            <button onClick={createChannel}>Add Username</button>
           </div>
           <div className={styles.rhs}>
             <div className={styles.rhs__content}>
