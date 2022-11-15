@@ -47,9 +47,11 @@ const RegisterForm = (props: Props) => {
           cookies.set('hashedPassword', hashedPassword);
           router.push('/game');
           toast.success('Registered successfully');
+          setIsLoading({ loading: false, error: false });
         }
       })
       .catch((err) => {
+        setIsLoading({ loading: false, error: false });
         toast.error('Username or email already exists');
       });
   };
