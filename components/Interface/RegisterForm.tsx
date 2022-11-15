@@ -5,6 +5,8 @@ import AnimatedLetters from './AnimatedLetters';
 import Cookies from 'universal-cookie';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
+import { useRecoilState } from 'recoil';
+import { authAtom } from '../../atom/authAtom';
 
 type Props = {};
 
@@ -16,6 +18,7 @@ const RegisterForm = (props: Props) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [username, setUsername] = useState('');
+  const [_, setIsLoading] = useRecoilState(authAtom);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,6 +27,8 @@ const RegisterForm = (props: Props) => {
       alert("Passwords don't match");
       return;
     }
+
+    setIsLoading({ loading: true, error: false });
 
     axios
       .post('/api/auth/register', {
@@ -34,13 +39,15 @@ const RegisterForm = (props: Props) => {
       .then((res) => {
         const { token, email, username, userId, hashedPassword } = res.data;
 
-        cookies.set('token', token);
-        cookies.set('email', email);
-        cookies.set('username', username);
-        cookies.set('userId', userId);
-        cookies.set('hashedPassword', hashedPassword);
-        router.push('/game');
-        toast.success('Registered successfully');
+        if (res.status === 200) {
+          cookies.set('token', token);
+          cookies.set('email', email);
+          cookies.set('username', username);
+          cookies.set('userId', userId);
+          cookies.set('hashedPassword', hashedPassword);
+          router.push('/game');
+          toast.success('Registered successfully');
+        }
       })
       .catch((err) => {
         console.log(err);

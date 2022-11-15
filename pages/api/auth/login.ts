@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 
 const apiKey = 'udmu9745hbke';
 const apiSecret =
-  'kcteb2a9gsv2fgm3sn3whbgenerhp9t555qnu9bv7hun59ebf54jb6pa8awceuaf';
+  process.env.NEXT_PUBLIC_STREAM_API_SECRET || "";
 const serverClient = new StreamChat(apiKey, apiSecret);
 
 export default async function handler(

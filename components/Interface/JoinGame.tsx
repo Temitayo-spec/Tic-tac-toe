@@ -5,15 +5,21 @@ import { useChatContext, Channel } from 'stream-chat-react';
 import Game from './Game';
 import styles from '../../styles/JoinGame.module.scss';
 import AnimatedLetters from './AnimatedLetters';
+import { useRecoilState } from 'recoil';
+import { channelAtom } from '../../atom/channelAtom';
+import Loader from '../Loader/Loader';
 
 type Props = {};
 
 const JoinGame = (props: Props) => {
+  const [isLoading, setIsLoading] = useRecoilState(channelAtom);
   const [rivalUsername, setRivalUsername] = useState<string>('');
   const [channel, setChannel] = useState(null);
 
   const { client } = useChatContext();
   const createChannel = async () => {
+    setIsLoading(true);
+
     const response = await client.queryUsers({
       name: {
         $eq: rivalUsername,
@@ -32,6 +38,7 @@ const JoinGame = (props: Props) => {
     await newChannel.create();
     await newChannel.watch();
     setChannel(newChannel as any);
+    setIsLoading(false);
     toast.success('Channel created');
   };
 
@@ -46,6 +53,7 @@ const JoinGame = (props: Props) => {
 
   return (
     <>
+      {isLoading ? <Loader size={100} speed={1} color="#ffd700" /> : ''}
       {channel ? (
         <Channel channel={channel}>
           <Game channel={channel} />

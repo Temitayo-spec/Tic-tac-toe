@@ -26,6 +26,10 @@
             font-size: 2rem;
             margin-bottom: 20px;
             color: rgb(112, 112, 112);
+
+            @media screen and (max-width: 768px) {
+                font-size: 1.5rem;
+            }
         }
 
         .about__text {

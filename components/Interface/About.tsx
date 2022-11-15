@@ -31,8 +31,8 @@ const About = ({ openModal, setOpenModal }: Props) => {
               />
             </svg>
             <p className={styles.about__text}>
-              This is a simple tic tac toe game built with Next.js and React,
-              and styled with Sass.
+              This is a multiplayer tic tac toe game built with Next.js and React,
+              and styled with Sass, and Recoil for state management also with a built-in chat system.
             </p>
             <p className={styles.about__text}>
               The game is built with a simple state management system, and the

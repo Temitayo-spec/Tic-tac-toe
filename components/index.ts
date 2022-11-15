@@ -6,3 +6,5 @@ export { default as LoginForm } from './Interface/LoginForm';
 export { default as RegisterForm } from './Interface/RegisterForm';
 export { default as JoinGame } from './Interface/JoinGame';
 export { default as Board } from './Interface/Game/Board';
+export { default as Loader } from './Loader/Loader';
+export {default as Preloader} from './Loader/Preloader';

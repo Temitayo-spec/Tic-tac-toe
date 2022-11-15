@@ -37,8 +37,7 @@ export default function Home() {
             />
           </h1>
           <p className={styles.description}>
-            A simple tic tac toe game built with Next.js and React,
-            <br />
+            This is a multiplayer tic tac toe game built with Next.js and React,
             and styled with Sass.
           </p>
           <button className={styles.button} onClick={() => setOpenModal(true)}>

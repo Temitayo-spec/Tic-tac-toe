@@ -1,12 +1,13 @@
 import '../styles/globals.scss';
 import type { AppProps } from 'next/app';
-import { Layout } from '../components';
+import { Layout, Preloader } from '../components';
 import { StreamChat } from 'stream-chat';
 import Cookies from 'universal-cookie';
 import { RecoilRoot } from 'recoil';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '@stream-io/stream-chat-css/dist/css/index.css';
+import { useEffect, useState } from 'react';
 
 export default function App({ Component, pageProps }: AppProps) {
   const cookies = new Cookies();
@@ -30,11 +31,19 @@ export default function App({ Component, pageProps }: AppProps) {
         console.log('User connected', user);
       });
   }
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 4000);
+  }, []);
   return (
     <RecoilRoot>
       <Layout>
         <ToastContainer />
-        <Component {...pageProps} />
+        {loading ? <Preloader /> : <Component {...pageProps} />}
       </Layout>
     </RecoilRoot>
   );

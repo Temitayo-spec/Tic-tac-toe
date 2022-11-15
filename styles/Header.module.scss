@@ -32,6 +32,10 @@
             letter-spacing: 1px;
             color: #EC54A7;
         }
+
+        @media screen and (max-width: 768px) {
+            display: none;
+        }
     }
 
     .rhs {

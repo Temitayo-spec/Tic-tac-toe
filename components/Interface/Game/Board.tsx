@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import styles from '../../../styles/Board.module.scss';
 import { createConfetti } from '../../Confetti/canvas-confetti';
 import { useChannelStateContext, useChatContext } from 'stream-chat-react';
+import ChatIcon from '../../Svg/ChatIcon';
+import { useRecoilState } from 'recoil';
+import { toggleAtom } from '../../../atom/toggleAtom';
 
 type Props = {};
 
@@ -15,8 +18,13 @@ const Board = (props: Props) => {
   const [player, setPlayer] = useState('X');
   const [winner, setWinner] = useState('');
   const [isDraw, setIsDraw] = useState(false);
+  const [toggle, setToggle] = useRecoilState(toggleAtom);
   const { channel } = useChannelStateContext();
   const { client } = useChatContext();
+
+  const toggleChat = () => {
+    setToggle(!toggle);
+  };
 
   const handleCellClick = async (row: number, col: number) => {
     if (board[row][col] !== '' || winner !== '' || isDraw || turn !== player) {
@@ -171,6 +179,7 @@ const Board = (props: Props) => {
           </a>
         </p>
       </div>
+      <ChatIcon className={styles.chat__icon} onClick={toggleChat} />
 
       <div className={styles.container}>
         <div className={styles.status}>

@@ -14,6 +14,10 @@
         cursor: pointer;
         transition: all 0.3s ease-in-out;
         margin: 0 0 0.5em 0;
+
+        @media screen and (max-width: 768px) {
+            font-size: 1.2em;
+        }
     }
 }
 
@@ -34,6 +38,10 @@
     letter-spacing: 2px;
     text-shadow: 0 0 10px #000;
     outline: none;
+
+    @media screen and (max-width: 768px) {
+        font-size: 1.5em;
+    }
 }
 
 .title {
@@ -43,6 +51,10 @@
     text-shadow: 0 0 10px #000;
     letter-spacing: 2px;
     margin-bottom: 0.5rem;
+
+    @media screen and (max-width: 768px) {
+        font-size: 2rem;
+    }
 }
 
 .container {
@@ -133,5 +145,45 @@
         &:hover {
             background: #ffd700;
         }
+    }
+}
+
+.chat__icon {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 1em;
+    font-size: 2em;
+    color: #fff;
+    background-color: transparent;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px #000;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    z-index: 555;
+
+    &:hover {
+        color: #ffd700;
+    }
+    display: none;
+
+    @media screen and (max-width: 768px) {
+        font-size: 1.5em;
+        display: block;
+    }
+
+    &::before {
+        content: "Chat";
+        font-size: 0.5em;
+        font-weight: 700;
+        color: #fff;
+        background-color: transparent;
+        letter-spacing: 2px;
+        text-shadow: 0 0 10px #000;
+        outline: none;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        margin-left: 0.5em;
     }
 }

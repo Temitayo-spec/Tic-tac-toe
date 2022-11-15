@@ -136,3 +136,25 @@ a {
   outline: none;
   transition: all 0.3s ease-in-out;
 }
+
+@media screen and (max-width: 768px) {
+  .str-chat__input-flat {
+    width: 100%;
+    padding: 0;
+  }
+
+  .str-chat__input-flat {
+    width: 100%;
+    padding: 0 !important;
+  }
+
+  .str-chat__input-flat .str-chat__textarea>textarea {
+    width: 100%;
+    padding: 0.5em 1em;
+  }
+
+  body,
+  html {
+    overflow-y: auto;
+  }
+}

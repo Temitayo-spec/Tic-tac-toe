@@ -3,12 +3,15 @@ import Board from './Game/Board';
 import styles from '../../styles/Game.module.scss';
 import { Waveform } from '@uiball/loaders';
 import { Window, MessageList, MessageInput } from 'stream-chat-react';
+import { useRecoilValue } from 'recoil';
+import { toggleAtom } from '../../atom/toggleAtom';
 
 type Props = {
   channel: any;
 };
 
 const Game = ({ channel }: Props) => {
+  const tooggleChat = useRecoilValue(toggleAtom)
   const [playerJoined, setPlayerJoined] = useState(
     channel.state.watcher_count === 2
   );
@@ -30,7 +33,7 @@ const Game = ({ channel }: Props) => {
   return (
     <div className={styles.game__ctn}>
       <Board />
-      <div className={styles.rhs}>
+      <div className={`${styles.rhs} ${tooggleChat ? styles.appear : ""}`}>
         <Window>
           <MessageList />
           <MessageInput />

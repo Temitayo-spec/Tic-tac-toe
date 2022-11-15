@@ -4,6 +4,13 @@
     justify-content: space-between;
     width: 80%;
     margin: 0 auto;
+
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+    }
 }
 
 .game__ctn {
@@ -25,6 +32,21 @@
     margin: 0 auto;
     height: 70vh;
     filter: drop-shadow(0 0 10px #000);
+
+    @media screen and (max-width: 768px) {
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        position: fixed;
+        background: whitesmoke;
+        padding: 1em;   
+        z-index: 50;
+        display: none;
+    }
+}
+
+.appear {
+    display: flex;
 }
 
 .waiting__text {
@@ -61,5 +83,9 @@
     &::before {
         content: "<";
         margin-right: 0.5em;
+    }
+
+    @media screen and (max-width: 768px) {
+        font-size: 1.2rem;
     }
 }
