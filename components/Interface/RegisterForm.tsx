@@ -54,6 +54,8 @@ const RegisterForm = (props: Props) => {
           setIsLoading({ loading: false, error: false });
           toast.error('Username or email already exists');
         });
+    } else {
+      toast.error('Please fill in all fields');
     }
   };
   const gameArray = 'Register'.split('');
