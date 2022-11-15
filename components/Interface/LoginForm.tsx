@@ -18,20 +18,25 @@ const LoginForm = (props: Props) => {
   const router = useRouter();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading({ loading: true, error: false });
-    axios.post('/api/auth/login', { username, password }).then((res: any) => {
-      const { token, email, username, userId, hashedPassword } = res.data;
-      if (res.status === 200) { 
-        cookies.set('token', token);
-        cookies.set('email', email);
-        cookies.set('username', username);
-        cookies.set('userId', userId);
-        cookies.set('hashedPassword', hashedPassword);
-        setIsLoading({ loading: false, error: false });
-        router.push('/game');
-        toast.success('Logged in successfully');
-      }
-    });
+    try {
+      setIsLoading({ loading: true, error: false });
+      axios.post('/api/auth/login', { username, password }).then((res: any) => {
+        const { token, email, username, userId, hashedPassword } = res.data;
+        if (res.status === 200) {
+          cookies.set('token', token);
+          cookies.set('email', email);
+          cookies.set('username', username);
+          cookies.set('userId', userId);
+          cookies.set('hashedPassword', hashedPassword);
+          setIsLoading({ loading: false, error: false });
+          router.push('/game');
+          toast.success('Logged in successfully');
+        }
+      });
+    } catch (error) {
+      setIsLoading({ loading: false, error: false });
+      toast.error('Username or password is incorrect');
+    }
   };
 
   const [letterClass, setLetterClass] = useState('text__animate');

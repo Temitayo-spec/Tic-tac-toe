@@ -24,7 +24,7 @@ const RegisterForm = (props: Props) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("Passwords don't match");
+      toast.error('Passwords do not match');
       return;
     }
 
@@ -50,7 +50,7 @@ const RegisterForm = (props: Props) => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        toast.error('Username or email already exists');
       });
   };
   const gameArray = 'Register'.split('');

@@ -18,28 +18,33 @@ const JoinGame = (props: Props) => {
 
   const { client } = useChatContext();
   const createChannel = async () => {
-    setIsLoading(true);
+    try {
+      setIsLoading(true);
 
-    const response = await client.queryUsers({
-      name: {
-        $eq: rivalUsername,
-      },
-    });
+      const response = await client.queryUsers({
+        name: {
+          $eq: rivalUsername,
+        },
+      });
 
-    if (response.users.length === 0) {
-      toast.error('User not found');
-      return;
+      if (response.users.length === 0) {
+        toast.error('User not found');
+        return;
+      }
+
+      const newChannel = client.channel('messaging', {
+        members: [client.userID, response.users[0].id] as string[],
+      });
+
+      await newChannel.create();
+      await newChannel.watch();
+      setChannel(newChannel as any);
+      setIsLoading(false);
+      toast.success('Channel created');
+    } catch (error) {
+      setIsLoading(false);
+      toast.error('Error creating channel');
     }
-
-    const newChannel = client.channel('messaging', {
-      members: [client.userID, response.users[0].id] as string[],
-    });
-
-    await newChannel.create();
-    await newChannel.watch();
-    setChannel(newChannel as any);
-    setIsLoading(false);
-    toast.success('Channel created');
   };
 
   const [letterClass, setLetterClass] = useState('text__animate');
@@ -72,7 +77,7 @@ const JoinGame = (props: Props) => {
               value={rivalUsername}
               onChange={(e) => setRivalUsername(e.target.value)}
             />
-            <button onClick={createChannel}>Create Channel</button>
+            <button onClick={createChannel}>Create/Join Channel</button>
           </div>
           <div className={styles.rhs}>
             <div className={styles.rhs__content}>
