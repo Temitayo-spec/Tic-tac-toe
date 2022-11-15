@@ -4,6 +4,7 @@
     justify-content: space-between;
     width: 80%;
     margin: 0 auto;
+    margin-top: -10em;
 
     @media screen and (max-width: 768px) {
         flex-direction: column;
@@ -20,7 +21,6 @@
     width: 80%;
     height: 100%;
     margin: 0 auto;
-    margin-top: -3em;
 }
 
 .rhs {
@@ -50,7 +50,7 @@
 }
 
 .waiting__text {
-    font-size: 5em;
+    font-size: 4em;
     font-weight: 700;
     color: #ffd700;
     background-color: transparent;

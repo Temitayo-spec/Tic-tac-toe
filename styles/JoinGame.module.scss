@@ -62,8 +62,8 @@
             padding: 0 10px;
             font-size: 1.5rem;
             font-weight: 500;
-            color: #ffd700;
-            background-color: #f5f5f5;
+            color: #fff;
+            background-color: #ffd700;
             letter-spacing: 2px;
             text-shadow: 0 0 10px #000;
             outline: none;
@@ -72,8 +72,8 @@
             transition: all 0.3s ease-in-out;
 
             &:hover {
-                background-color: #ffd700;
-                color: #fff;
+                background-color: transparent;
+                color: #ffd700;
             }
 
             &::after {
