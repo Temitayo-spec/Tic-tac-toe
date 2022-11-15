@@ -19,29 +19,33 @@ const JoinGame = (props: Props) => {
   const { client } = useChatContext();
   const createChannel = async () => {
     try {
-      setIsLoading(true);
+      if (rivalUsername !== '') {
+        setIsLoading(true);
 
-      const response = await client.queryUsers({
-        name: {
-          $eq: rivalUsername,
-        },
-      });
+        const response = await client.queryUsers({
+          name: {
+            $eq: rivalUsername,
+          },
+        });
 
-      if (response.users.length === 0) {
-        toast.error('User not found');
+        if (response.users.length === 0) {
+          toast.error('User not found');
+          setIsLoading(false);
+          return;
+        }
+
+        const newChannel = client.channel('messaging', {
+          members: [client.userID, response.users[0].id] as string[],
+        });
+
+        await newChannel.create();
+        await newChannel.watch();
+        setChannel(newChannel as any);
         setIsLoading(false);
-        return;
+        toast.success('Channel created');
+      } else {
+        toast.error('Please enter a username');
       }
-
-      const newChannel = client.channel('messaging', {
-        members: [client.userID, response.users[0].id] as string[],
-      });
-
-      await newChannel.create();
-      await newChannel.watch();
-      setChannel(newChannel as any);
-      setIsLoading(false);
-      toast.success('Channel created');
     } catch (error) {
       setIsLoading(false);
       toast.error('Error creating channel');
@@ -72,13 +76,15 @@ const JoinGame = (props: Props) => {
               letterClass={letterClass}
               idx={2}
               className={styles.lhs__content__title__text}
-              />
-              <p style={{
-                color: "#fff",
-                textAlign: "center",
-              }}>
-                Input Rival&apos;s Username.
-              </p>
+            />
+            <p
+              style={{
+                color: '#fff',
+                textAlign: 'center',
+              }}
+            >
+              Input Rival&apos;s Username.
+            </p>
             <input
               type="text"
               value={rivalUsername}
