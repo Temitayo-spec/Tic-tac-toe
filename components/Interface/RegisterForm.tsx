@@ -27,10 +27,9 @@ const RegisterForm = (props: Props) => {
       toast.error('Passwords do not match');
       return;
     }
-
-    setIsLoading({ loading: true, error: false });
-
+    
     if (email !== '' && password !== '' && username !== '') {
+      setIsLoading({ loading: true, error: false });
       axios
         .post('/api/auth/register', {
           email,

@@ -19,8 +19,8 @@ const LoginForm = (props: Props) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      setIsLoading({ loading: true, error: false });
       if (username !== '' && password !== '') {
+        setIsLoading({ loading: true, error: false });
         axios
           .post('/api/auth/login', { username, password })
           .then((res: any) => {
@@ -36,6 +36,8 @@ const LoginForm = (props: Props) => {
               toast.success('Logged in successfully');
             }
           });
+      } else {
+        toast.error('Please enter a username and password');
       }
     } catch (error) {
       setIsLoading({ loading: false, error: false });
